@@ -20,36 +20,35 @@
         </nav>
     </header>
 
-    
-        <!--Search bos for finding weather of specified city-->
-        <section class="search-container">
 
-            <form id="search-form">
-                <h1>Search for a City:</h1>
-                <input type="text" id="weather-search" name="name">
-                <button class="search-button">Search</button>
-            </form>
+    <!--Search bos for finding weather of specified city-->
+    <section class="search-container">
 
-            <ul id="search-history">
+        <form id="search-form">
+            <h1>Search for a City:</h1>
+            <input type="text" id="weather-search" name="name">
+            <button class="search-button">Search</button>
+        </form>
 
-            </ul>
-        </section>
+        <ul id="search-history">
 
+        </ul>
+    </section>
+
+
+    <section class="todays-weather">
         <!--Weather Results for current date-->
-        <section class="todays-weather">
-            <h1 class="state-location">Test</h1>
-            <img src="" alt="Current Day Weather Icon" width="" height="">
-            <p>Temp:</p>
-            <p>Wind:</p>
-            <p>Humidity:</p>
-        </section>
 
-        <section class="upcoming-weather">
-            <!--Cards for 5-day forecard display-->
-            
-        </section>
+    </section>
 
-<script src="./js/weather.js"></script>
+    <section class="upcoming-weather">
+        <!--Cards for 5-day forecard display-->
+
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/dayjs@1.11.3/dayjs.min.js"
+        integrity="sha256-iu/zLUB+QgISXBLCW/mcDi/rnf4m4uEDO0wauy76x7U=" crossorigin="anonymous"></script>
+    <script src="./js/weather.js"></script>
 </body>
 
 </html>
