@@ -1,13 +1,13 @@
 var searchCityEl = document.querySelector('#search-form');
 
-function searchCitySubmit(event){
+function searchCitySubmit(event) {
     event.preventDefault();
     //get input from search 
     var cityInputVal = document.querySelector('#weather-search').value;
     console.log(cityInputVal);
 
     //validate that input is not empty
-    if(!cityInputVal) {
+    if (!cityInputVal) {
         console.error('You need to enter a city to get the weather!');
         return;
     }
