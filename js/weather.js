@@ -1,11 +1,20 @@
 var searchCityEl = document.querySelector('#search-form');
 var currentWeatherEl = document.querySelector('.todays-weather');
 var futureWeatherEl = document.querySelector('.upcoming-weather');
+var cityListEl = document.querySelector('#search-history');
+var clearHistoryEl = document.querySelector('.clear-button');
+
+//variables for lon and lat
 
 var cityLon = '';
 var cityLat = '';
 
+//get current day using dayjs
 var currDay = dayjs().format('(M/D/YYYY)');
+
+//Retrieving cities from local storage
+var cityList = JSON.parse(localStorage.getItem("cities"));
+
 
 function getParams() {
     //get the search parameter from the url
@@ -19,6 +28,7 @@ function getParams() {
 
 }
 
+//function to get lon lat of city that was searched and then use them to get current weather and future weather forecasts
 function searchCities(searchCity) {
 
     var getGeoLoc = 'https://api.openweathermap.org/geo/1.0/direct?limit=5&appid=43b8c16645fd2e7758cee078f50a7301';
@@ -39,14 +49,15 @@ function searchCities(searchCity) {
                 //check to verify location is in the US
                 for (var i = 0; i < data.length; i++) {
 
-                    //if it is it takes the lon lat and ends the for loop
+                    //if it is a US location it takes the lon lat and ends the for loop
                     if (data[i].country === 'US') {
                         console.log('This location is in the US');
                         cityLon = data[i].lon;
                         cityLat = data[i].lat;
-
+                        //calls  get current weather and get forecast detail functions
                         getcurrentWeather(cityLon, cityLat);
                         getForecastDetail(cityLon, cityLat);
+
                         return;
                     } else {
                         console.log('This location is not in the US');
@@ -60,6 +71,7 @@ function searchCities(searchCity) {
 
 //Get 5 day forecast detail using lon lat 
 function getForecastDetail(cityLon, cityLat) {
+    
     console.log(cityLon, cityLat);
 
     var getCityWeather = 'https://api.openweathermap.org/data/2.5/forecast?&appid=43b8c16645fd2e7758cee078f50a7301&units=imperial';
@@ -123,6 +135,11 @@ function getcurrentWeather(cityLon, cityLat) {
     getCurrentWeather = getCurrentWeather + '&lon=' + cityLon + '&appid=43b8c16645fd2e7758cee078f50a7301&units=imperial';
     console.log(getCurrentWeather);
 
+    //clear the current weather and 5 day forecast sections for function call on search history event
+
+    currentWeatherEl.innerHTML = '';
+    futureWeatherEl.innerHTML = '';
+
     //call to the weather api
     fetch(getCurrentWeather).then(function (response) {
         if (response.ok) {
@@ -167,7 +184,6 @@ function getcurrentWeather(cityLon, cityLat) {
 //Function to display the 5 day forecast
 
 function display5DayWeather(resultObj) {
-    // console.log(resultObj);
 
     var forecastDay = dayjs(resultObj.dt_txt).format('M/D/YYYY');
 
@@ -208,4 +224,50 @@ function display5DayWeather(resultObj) {
 
 }
 
+
+//function to render cities list
+function renderCitiesList() {
+
+    //Makesure local storage is not empty
+    if (cityList && cityList.length) {
+
+        //render list of cities
+
+        for (var i = 0; i < 8; i++) {
+
+            var li = document.createElement('li');
+            li.textContent = cityList[i];
+            li.setAttribute("id", "list-item");
+            cityListEl.append(li);
+        }
+    }
+
+}
+
+//event listener for history list items 
+cityListEl.addEventListener('click', function (event) {
+    event.preventDefault;
+
+    var element = event.target;
+
+    //target list items
+    if (element.matches("li")) {
+        var selectedOption = element.textContent;
+        searchCities(selectedOption);
+    }
+});
+
+//event listener for clear search history
+clearHistoryEl.addEventListener('click', function(event){
+event.preventDefault;
+
+if(event){
+    localStorage.clear();
+    location.reload();
+}
+});
+
+//Function call for getParams and renderCities 
+
 getParams();
+renderCitiesList();
