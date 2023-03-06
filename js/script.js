@@ -14,6 +14,13 @@ function searchCitySubmit(event) {
     //adds query search to the weather-display.html call
     var queryString = './weather-display.html?q=' + cityInputVal;
 
+    var citiesList = JSON.parse(localStorage.getItem("cities")) || [];
+    citiesList.push(cityInputVal);
+
+    //Stores initials and score in local storage to be used in High scores page
+
+    localStorage.setItem('cities', JSON.stringify(citiesList));
+
     //assigns query string as the url
     location.assign(queryString);
 }

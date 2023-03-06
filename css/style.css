@@ -1,37 +1,119 @@
-body {
-    font-family: 'Fira Sans', sans-serif;
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 
 }
 
-.weather-nav { 
+body {
 
+    background-color: #c9bdbd;
+
+}
+
+
+.weather-nav {
+    background-image: linear-gradient(rgba(17, 0, 255, 0.79) 0%,
+            rgba(97, 56, 97, 0.471) 100%);
+    padding: 10px;
+    width: 100%;
+    color: white;
+}
+
+li {
+    list-style-type: none;
+    text-align: center;
+    font-weight: bold;
+    font-size: 32px;
+}
+
+p {
+    margin: 10px;
+    font-weight: bold;
+}
+
+#list-item {
+    margin: 10px;
+    font-size: 15px;
+    background-color: gray;
+    border-radius: 20px;
+    width: 30%;
+    margin-left: 122px;
+}
+
+#list-item:hover {
+    cursor: pointer;
+    box-shadow: 0 0.4rem 1.4rem 0 rgba(172, 15, 138, 0.79);
+    transform: scale(1.02);
+    transform: transform 100ms;
 }
 
 .search-container {
 
+    background-image: linear-gradient(rgba(255, 0, 21, 0.79) 0%,
+            rgba(208, 16, 208, 0.471) 100%);
+
+    width: 20%;
+    border-radius: 20px;
+    text-align: center;
+    padding: 10px;
+    margin: 20px;
+    border: 2px solid black;
+    float: left;
+
 }
 
-.search-history { 
-
+.todays-weather {
+    display: flex;
+    justify-content: center;
 }
 
 .weather-body {
-    background-color:red;
-    padding:10px;
-    width:50%;
+    background-image: linear-gradient(rgba(255, 0, 21, 0.79) 0%,
+            rgba(208, 16, 208, 0.471) 100%);
+    padding: 10px;
+    width: 50%;
+    border-radius: 20px;
+    border: 2px solid black;
+    float: right;
+    margin: 30px;
+
 }
 
 .upcoming-weather {
-    display:flex;
-    
+    display: flex;
+    justify-content: center;
+    margin-left: 400px;
 }
 
-.card{ 
-    padding:20px;
+.card {
+    padding: 20px;
+
 }
 
 .card-body {
-    background-color:gray;
-    padding:10px;
+    background-image: linear-gradient(rgba(53, 47, 47, 0.79) 0%,
+            rgba(208, 16, 208, 0.471) 100%);
+    padding: 10px;
+    border-radius: 20px;
+    text-align: center;
+    border: 2px solid black;
 }
 
+/* Add media screens for responsive design */
+@media screen and (max-width:992px) {
+    .card {
+        width: 50%;
+    }
+
+
+}
+
+
+@media screen and (max-width:768px) {
+    .card {
+        width: 100%;
+    }
+
+}
